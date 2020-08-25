@@ -4,7 +4,7 @@ export default class Navbar extends Component {
   handleLogOut = async event => {
     event.preventDefault();
     try {
-      Auth.signOut();
+      await Auth.signOut();
       this.props.auth.setAuthStatus(false);
       this.props.auth.setUser(null);
       console.log("user logged out");
