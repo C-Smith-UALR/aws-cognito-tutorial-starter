@@ -40,7 +40,27 @@ class Register extends Component {
 
     // AWS Cognito integration here
     const { username, email, password } = this.state;
-
+    try {
+      // eslint-disable-next-line
+      const signUpResponse = await Auth.signUp({
+        username,
+        password,
+        attributes: {
+          email: email
+        }
+      });
+      console.log(signUpResponse);
+      this.props.history.push("/welcome");
+    }catch(error) {
+      let err = null;
+      !error.message ? err = { "message": error } : err=error;
+      this.setState({
+        errors: {
+          ...this.state.errors,
+          cognito: err
+        }
+      })
+    }
 
 
   };
